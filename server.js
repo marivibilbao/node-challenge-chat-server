@@ -36,6 +36,15 @@ app.get("/messages/:id", (request, response) => {
   }
 });
 
+//GET Search
+app.get("/messages/search/:text", (request, response) => {
+  const searchText = request.params.text.toLowerCase();
+  const result = messages.filter((message) => {
+    return message.text.toLocaleLowerCase().includes(searchText);
+  })
+  response.send(result);
+});
+
 //POST
 app.post("/messages", function (request, response){
   const from = request.body.from;
