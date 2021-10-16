@@ -26,7 +26,7 @@ app.get("/messages", (request, response) => {
 });
 
 //GET by ID
-app.get("/messages/:id", (request, response) => {
+app.get("/messages/id/:id", (request, response) => {
   const messageId = parseInt(request.params.id);
   const message = messages.find((message) => message.id === messageId);
   if (message) {
@@ -42,6 +42,13 @@ app.get("/messages/search/:text", (request, response) => {
   const result = messages.filter((message) => {
     return message.text.toLocaleLowerCase().includes(searchText);
   })
+  response.send(result);
+});
+
+//GET Latest
+app.get("/messages/latest", (request, response) => {
+  const messagesToShow = 10;
+  let result = messages.slice(-messagesToShow);
   response.send(result);
 });
 
