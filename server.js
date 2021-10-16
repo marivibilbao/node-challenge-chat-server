@@ -36,6 +36,19 @@ app.get("/messages/:id", (request, response) => {
   }
 });
 
+//POST
+app.post("/messages", function (request, response){
+  const from = request.body.from;
+  const text = request.body.text;
+  const newMessage = {
+    id: messages.length,
+    from: from,
+    text: text
+  };
+  messages.push(newMessage);
+  response.json({success: true});
+});
+
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
