@@ -40,6 +40,15 @@ app.get("/messages/:id", (request, response) => {
 app.post("/messages", function (request, response){
   const from = request.body.from;
   const text = request.body.text;
+
+  if (!from && !text) {
+    return response.status(400).json({error: "Las propiedades de autor y texto están vacías"});
+  } else if (!from){
+    return response.status(400).json({error: "Autor está vacío"});
+  } else if (!text){
+    return response.status(400).json({error: "Texto está vacío"})
+  }
+
   const newMessage = {
     id: messages.length,
     from: from,
@@ -57,6 +66,6 @@ app.delete("/messages/:id", function(request, response){
   response.send({success: true});
 });
 
-app.listen(3000, () => {
-  console.log("Listening on port 3000");
+app.listen(3001, () => {
+  console.log("Listening on port 3001");
 });
