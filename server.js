@@ -48,7 +48,7 @@ app.get("/messages/search/:text", (request, response) => {
 //GET Latest
 app.get("/messages/latest", (request, response) => {
   const messagesToShow = 10;
-  let result = messages.slice(-messagesToShow);
+  const result = messages.slice(-messagesToShow);
   response.send(result);
 });
 
