@@ -49,6 +49,14 @@ app.post("/messages", function (request, response){
   response.json({success: true});
 });
 
+//DELETE
+app.delete("/messages/:id", function(request, response){
+  const id = parseInt(request.params.id);
+  const index = messages.findIndex(message => message.id === id);
+  messages.splice(index, 1);
+  response.send({success: true});
+});
+
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
