@@ -7,8 +7,8 @@ app.use(cors());
 
 const welcomeMessage = {
   id: 0,
-  from: "Bart",
-  text: "Welcome to CYF chat system!",
+  from: "Steve Jobs",
+  text: "El único modo de hacer un gran trabajo es amar lo que haces.",
 };
 
 //This array is our "data store".
@@ -20,6 +20,22 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + "/index.html");
 });
 
+//GET Messages
+app.get("/messages", (request, response) => {
+  response.send(messages);
+});
+
+//GET by ID
+app.get("/messages/:id", (request, response) => {
+  const messageId = parseInt(request.params.id);
+  const message = messages.find((message) => message.id === messageId);
+  if (message) {
+    response.send(message);
+  } else {
+    response.status(400).json({error: "El mensaje con la ID " + messageId + " no se encuentra."});
+  }
+});
+
 app.listen(3000, () => {
-   console.log("Listening on port 3000")
-  });
+  console.log("Listening on port 3000");
+});
